@@ -9,7 +9,10 @@ module Dwolla
       end
 
       def get(resource)
-        response = connection.get(resource + query_params)
+        url = resource
+        url += "?" unless resource =~ /\?/
+        url += query_params
+        response = connection.get(url)
         response.body
       end
   end

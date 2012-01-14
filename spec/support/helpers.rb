@@ -1,10 +1,13 @@
-def a_get(path, params, endpoint = Dwolla.endpoint)
-  url = endpoint + path + '?' + params
+def a_get(path, params = nil)
+  url = Dwolla.endpoint + path
+  url += "?#{params}" if params
   a_request(:get, url)
 end
 
-def stub_get(path, params, endpoint = Dwolla.endpoint)
-  stub_request(:get, endpoint + path + '?' + params)
+def stub_get(path, params = nil)
+  url = Dwolla.endpoint + path
+  url += "?#{params}" if params
+  stub_request(:get, url)
 end
 
 def fixture_path

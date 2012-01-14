@@ -1,0 +1,18 @@
+{
+    "Success": true,
+    "Message": "Success",
+    "Response": [
+        {
+            "Name": "Ben Facebook Test",
+            "Id": "12345",
+            "Type": "Facebook",
+            "Image": "https://graph.facebook.com/12345/picture?type=square"
+        },
+        {
+            "Name": "Ben Dwolla Test",
+            "Id": "812-111-1111",
+            "Type": "Dwolla",
+            "Image": "https://www.dwolla.com/avatar.aspx?u=812-111-1111"
+        }
+    ]
+}

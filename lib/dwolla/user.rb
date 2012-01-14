@@ -16,7 +16,7 @@ module Dwolla
     end
 
     def self.me(access_token)
-      User.new(:name => 'me', :access_token => access_token)
+      User.new(:access_token => access_token)
     end
 
     def fetch
@@ -35,10 +35,23 @@ module Dwolla
       get('/oauth/rest/balance')
     end
 
+    def contacts(options = {})
+      contacts_url = '/oauth/rest/contacts'
+      params = []
+      params << "search=#{options[:search]}" if options[:search]
+      params << "limit=#{options[:limit]}"  if options[:limit]
+      params << "type=#{options[:type]}"    if options[:type]
+      string_params = params.join("&")
+
+      contacts_url += "?#{string_params}&" unless params.empty?
+
+      get(contacts_url)
+    end
+
     private
 
       def query_params
-        "?access_token=#{self.access_token}"
+        "access_token=#{self.access_token}"
       end
    end
 end

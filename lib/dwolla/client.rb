@@ -14,7 +14,7 @@ module Dwolla
     private
 
       def query_params
-        "?client_id=#{@client}&client_secret=#{@secret}"
+        "client_id=#{@client}&client_secret=#{@secret}"
       end
    end
 end
