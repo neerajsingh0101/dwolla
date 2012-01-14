@@ -1,37 +1,18 @@
-require "rack/oauth2"
+require 'faraday'
 
 module Dwolla
-  ROOT_URL = "https://www.dwolla.com"
-
-  mattr_accessor :logger
-
-  self.logger = Logger.new(STDOUT)
-
-  def self.debugging?
-    @@debugging
+  def self.endpoint=(endpoint)
+    @@endpoint = endpoint
   end
 
-  def self.debugging=(boolean)
-    Rack::OAuth2.debugging = boolean
-    @@debugging = boolean
+  def self.endpoint
+    @@endpoint
   end
 
-  self.debugging = false
-
-  def self.debug!
-    Rack::OAuth2.debug!
-    self.debugging = true
-  end
-
-  def self.debug(&block)
-    rack_oauth2_original = Rack::OAuth2.debugging?
-    original = self.debugging?
-    debug!
-    yield
-  ensure
-    Rack::OAuth2.debugging = rack_oauth2_original
-    self.debugging = original
-  end
+  self.endpoint = "https://www.dwolla.com"
 end
 
+require "dwolla/response/parse_json"
+require "dwolla/client"
+require "dwolla/user"
 require "dwolla/version"
