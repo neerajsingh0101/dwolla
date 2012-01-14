@@ -25,5 +25,5 @@ def fixture_path
 end
 
 def fixture(file)
-  File.new(fixture_path + '/' + file)
+  IO.read(fixture_path + '/' + file)
 end

@@ -11,7 +11,9 @@ module Dwolla
 
         @connection ||= Faraday.new(Dwolla.endpoint, default_options) do |builder|
           builder.use Dwolla::Response::ParseJson
-          builder.adapter :net_http
+          builder.use Faraday::Request::UrlEncoded
+
+          builder.adapter Faraday.default_adapter
         end
       end
 
@@ -30,7 +32,7 @@ module Dwolla
             request.url(path, params.merge(auth_params))
           when :post
             request.path = path
-            params.merge(auth_params) if auth_params
+            params.merge!(auth_params) if auth_params
             request.body = params unless params.empty?
           end
         end

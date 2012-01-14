@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'faraday'
   s.add_dependency 'multi_json'
 
+  s.add_development_dependency 'pry'
   s.add_development_dependency 'bundler'
   s.add_development_dependency 'rake'
   s.add_development_dependency 'rspec'

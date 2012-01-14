@@ -2,9 +2,10 @@ module Dwolla
   class Transaction
     include Dwolla::Connection
 
-    ENDPOINTS = { :send => 'transactions/send' }
+    ENDPOINTS = { :send => 'transactions/send',
+                  :request => 'transactions/request' }
 
-    attr_accessor :origin, :destination, :type, :amount, :pin
+    attr_accessor :origin, :destination, :type, :amount, :pin, :id
 
     def initialize(attrs = {})
       attrs.each do |key, value|
@@ -13,7 +14,7 @@ module Dwolla
     end
 
     def execute
-      post(ENDPOINTS[type], to_payload)
+      self.id = post(ENDPOINTS[type], to_payload)
     end
 
     private
@@ -24,7 +25,7 @@ module Dwolla
 
       def to_payload
         { :destinationId => destination.id,
-          :amount => amount,
+          :amount => amount.to_s,
           :pin => pin }
       end
   end
