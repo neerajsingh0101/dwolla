@@ -13,6 +13,7 @@ module Dwolla
 end
 
 require "dwolla/response/parse_json"
+require "dwolla/connection"
 require "dwolla/client"
 require "dwolla/user"
 require "dwolla/version"

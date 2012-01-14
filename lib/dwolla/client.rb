@@ -1,12 +1,14 @@
 module Dwolla
   class Client
+    include Dwolla::Connection
+
     def initialize(client, secret)
       @client, @secret = client, secret
     end
 
     def user(id)
-      user_hash = get("/users/#{id}")
-      User.new(user_hash)
+      user_attributes_hash = get("/users/#{id}")
+      User.new(user_attributes_hash)
     end
 
     private
@@ -14,17 +16,5 @@ module Dwolla
       def query_params
         "?client_id=#{@client}&client_secret=#{@secret}"
       end
-
-      def connection
-        @connection ||= Faraday.new(:url => Dwolla.endpoint) do |builder|
-          builder.use Dwolla::Response::ParseJson
-          builder.adapter :net_http
-        end
-      end
-
-      def get(resource)
-        response = connection.get(resource + query_params)
-        response.body
-      end
-  end
+   end
 end

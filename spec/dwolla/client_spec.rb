@@ -7,7 +7,7 @@ describe Dwolla::Client do
   describe "getting user basic information" do
     before do
       stub_get('/users/812-111-1111', query_params).
-        to_return(:body => fixture("user.json"))
+        to_return(:body => fixture("basic_information.json"))
     end
 
     it 'should request the correct resource' do

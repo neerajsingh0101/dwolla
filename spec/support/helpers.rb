@@ -1,5 +1,6 @@
 def a_get(path, params, endpoint = Dwolla.endpoint)
-  a_request(:get, endpoint + path + '?' + params)
+  url = endpoint + path + '?' + params
+  a_request(:get, url)
 end
 
 def stub_get(path, params, endpoint = Dwolla.endpoint)
