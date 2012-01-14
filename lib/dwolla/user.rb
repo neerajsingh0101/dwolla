@@ -17,16 +17,6 @@ module Dwolla
       update_attributes(attrs)
     end
 
-    def self.instances_from_contacts(contacts)
-      user_instances = []
-      contacts.each do |contact|
-        contact["Contact_Type"] = contact["Type"]
-        contact.delete("Type")
-        user_instances << User.new(contact)
-      end
-      user_instances
-    end
-
     def self.me(access_token)
       User.new(:oauth_token => access_token)
     end
@@ -49,23 +39,44 @@ module Dwolla
 
     def contacts(options = {})
       contacts_url = '/oauth/rest/contacts'
-      params = []
-      params << "search=#{options[:search]}" if options[:search]
-      params << "limit=#{options[:limit]}"  if options[:limit]
-      params << "type=#{options[:type]}"    if options[:type]
-      string_params = params.join("&")
+      contacts = get(contacts_url, options)
 
-      contacts_url += "?#{string_params}&" unless params.empty?
+      instances_from_contacts(contacts)
+    end
 
-      contacts = get(contacts_url)
+    def send_money_to(destination, amount, pin)
+      transaction = Transaction.new(:origin => self,
+                                    :destination => destination,
+                                    :type => :send,
+                                    :amount => amount,
+                                    :pin => pin)
 
-      User.instances_from_contacts(contacts)
+      transaction.execute
+    end
+
+    def request_money_from(destination, amount, pin)
+      transaction = Transaction.new(:origin => self,
+                                    :destination => destination,
+                                    :type => :request,
+                                    :amount => amount,
+                                    :pin => pin)
+      transaction.execute
     end
 
     private
 
-      def query_params
-        "oauth_token=#{self.oauth_token}"
+      def instances_from_contacts(contacts)
+        user_instances = []
+        contacts.each do |contact|
+          contact["Contact_Type"] = contact["Type"]
+          contact.delete("Type")
+          user_instances << User.new(contact)
+        end
+        user_instances
+      end
+
+      def auth_params
+        { :oauth_token => self.oauth_token }
       end
    end
 end

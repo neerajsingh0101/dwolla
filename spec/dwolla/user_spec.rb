@@ -31,6 +31,49 @@ describe Dwolla::User do
     end
   end
 
+  describe "sending money" do
+    it "should make the correct transaction" do
+      user = Dwolla::User.new(:oauth_token => '12345', :id => '1')
+      destination_user = Dwolla::User.new(:id => '2')
+      amount = 10
+      pin = '2222'
+
+
+      transaction = double('transaction')
+
+      Dwolla::Transaction.should_receive(:new).with(:origin => user,
+                                            :destination => destination_user,
+                                            :amount => 10,
+                                            :type => :send,
+                                            :pin => '2222').and_return(transaction)
+
+      transaction.should_receive(:execute).and_return([:success])
+
+      user.send_money_to(destination_user, amount, pin).should == [:success]
+    end
+  end
+
+  describe "requesting money" do
+    it "should make the correct transaction" do
+      user = Dwolla::User.new(:oauth_token => '12345', :id => '1')
+      destination_user = Dwolla::User.new(:id => '2')
+      amount = 10
+      pin = '2222'
+
+      transaction = double('transaction')
+
+      Dwolla::Transaction.should_receive(:new).with(:origin => user,
+                                                    :destination => destination_user,
+                                                    :amount => 10,
+                                                    :type => :request,
+                                                    :pin => '2222').and_return(transaction)
+
+      transaction.should_receive(:execute).and_return([:success])
+
+      user.request_money_from(destination_user, amount, pin).should == [:success]
+    end
+  end
+
   it "knows his balance" do
     stub_get('/oauth/rest/balance', token_param).
       to_return(:body => fixture("balance.json"))
@@ -95,7 +138,7 @@ describe Dwolla::User do
       a_get("/oauth/rest/contacts?search=Bob&type=Facebook&limit=2&#{token_param}").should have_been_made
     end
 
-    it "should return the contact users info properly" do
+    it "should return the contact users properly" do
       user = Dwolla::User.me(oauth_token)
 
       stub_get("/oauth/rest/contacts", token_param).
