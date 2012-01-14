@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pry'
 
 describe Dwolla::Transaction do
   describe "send transaction" do
@@ -8,9 +7,9 @@ describe Dwolla::Transaction do
       @destination = double(:id => '2')
 
       @payload = { :oauth_token => '1',
-                  :destinationId => '2',
-                  :amount => '200',
-                  :pin => '1234' }
+                   :destinationId => '2',
+                   :amount => '200',
+                   :pin => '1234' }
 
       stub_post('/transactions/send').with(:body => @payload).to_return(
         :body => fixture('send_transaction.json'))
