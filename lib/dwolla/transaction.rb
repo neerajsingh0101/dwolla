@@ -2,7 +2,7 @@ module Dwolla
   class Transaction
     include Dwolla::Connection
 
-    ENDPOINTS = { :send => '/oauth/rest/transactions/send' }
+    ENDPOINTS = { :send => 'transactions/send' }
 
     attr_accessor :origin, :destination, :type, :amount, :pin
 

@@ -6,14 +6,14 @@ describe Dwolla::User do
 
   describe "fetching your full account information" do
     before do
-      stub_get('/oauth/rest/users', token_param).
+      stub_get('/accountinformation', token_param).
         to_return(:body => fixture("account_information.json"))
     end
 
     it "should request the correct resource" do
       user = Dwolla::User.me(oauth_token).fetch
 
-      a_get('/oauth/rest/users', token_param).should have_been_made
+      a_get('/accountinformation', token_param).should have_been_made
     end
 
     it "should return full information" do
@@ -75,7 +75,7 @@ describe Dwolla::User do
   end
 
   it "knows his balance" do
-    stub_get('/oauth/rest/balance', token_param).
+    stub_get('/balance', token_param).
       to_return(:body => fixture("balance.json"))
 
     user = Dwolla::User.me(oauth_token)
@@ -86,62 +86,62 @@ describe Dwolla::User do
     it "should request the correct resource when unfiltered" do
       user = Dwolla::User.me(oauth_token)
 
-      stub_get('/oauth/rest/contacts', token_param).
+      stub_get('/contacts', token_param).
         to_return(:body => fixture("contacts.json"))
 
       user.contacts
 
-      a_get('/oauth/rest/contacts', token_param).should have_been_made
+      a_get('/contacts', token_param).should have_been_made
     end
 
     it "should request the correct resource when seaching by name" do
       user = Dwolla::User.me(oauth_token)
 
-      stub_get("/oauth/rest/contacts?search=Bob&#{token_param}").
+      stub_get("/contacts?search=Bob&#{token_param}").
         to_return(:body => fixture("contacts.json"))
 
       user.contacts(:search => 'Bob')
 
-      a_get("/oauth/rest/contacts?search=Bob&#{token_param}").should have_been_made
+      a_get("/contacts?search=Bob&#{token_param}").should have_been_made
     end
 
     it "should request the correct resource when filtering by type" do
       user = Dwolla::User.me(oauth_token)
 
-      stub_get("/oauth/rest/contacts?type=Facebook&#{token_param}").
+      stub_get("/contacts?type=Facebook&#{token_param}").
         to_return(:body => fixture("contacts.json"))
 
       user.contacts(:type => 'Facebook')
 
-      a_get("/oauth/rest/contacts?type=Facebook&#{token_param}").should have_been_made
+      a_get("/contacts?type=Facebook&#{token_param}").should have_been_made
     end
 
     it "should request the correct resource when limiting" do
       user = Dwolla::User.me(oauth_token)
 
-      stub_get("/oauth/rest/contacts?limit=2&#{token_param}").
+      stub_get("/contacts?limit=2&#{token_param}").
         to_return(:body => fixture("contacts.json"))
 
       user.contacts(:limit => 2)
 
-      a_get("/oauth/rest/contacts?limit=2&#{token_param}").should have_been_made
+      a_get("/contacts?limit=2&#{token_param}").should have_been_made
     end
 
     it "should request the correct resource when using all together" do
       user = Dwolla::User.me(oauth_token)
 
-      stub_get("/oauth/rest/contacts?search=Bob&type=Facebook&limit=2&#{token_param}").
+      stub_get("/contacts?search=Bob&type=Facebook&limit=2&#{token_param}").
         to_return(:body => fixture("contacts.json"))
 
       user.contacts(:search => "Bob", :type => "Facebook", :limit => 2)
 
-      a_get("/oauth/rest/contacts?search=Bob&type=Facebook&limit=2&#{token_param}").should have_been_made
+      a_get("/contacts?search=Bob&type=Facebook&limit=2&#{token_param}").should have_been_made
     end
 
     it "should return the contact users properly" do
       user = Dwolla::User.me(oauth_token)
 
-      stub_get("/oauth/rest/contacts", token_param).
+      stub_get("/contacts", token_param).
         to_return(:body => fixture("contacts.json"))
 
       contacts = user.contacts

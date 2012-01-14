@@ -22,7 +22,7 @@ module Dwolla
     end
 
     def fetch
-      user_attributes_hash = get('/oauth/rest/users')
+      user_attributes_hash = get('accountinformation')
       update_attributes(user_attributes_hash)
       self
     end
@@ -34,11 +34,11 @@ module Dwolla
     end
 
     def balance
-      get('/oauth/rest/balance')
+      get('balance')
     end
 
     def contacts(options = {})
-      contacts_url = '/oauth/rest/contacts'
+      contacts_url = 'contacts'
       contacts = get(contacts_url, options)
 
       instances_from_contacts(contacts)

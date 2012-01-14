@@ -11,7 +11,7 @@ describe Dwolla::Transaction do
                   :amount => 200,
                   :pin => '1234' }
 
-      stub_post('/oauth/rest/transactions/send').with(:body => payload)
+      stub_post('/transactions/send').with(:body => payload)
 
       transaction = Dwolla::Transaction.new(:origin => origin,
                                             :destination => destination,
@@ -20,7 +20,7 @@ describe Dwolla::Transaction do
                                             :pin => '1234')
       transaction.execute
 
-      a_post('/oauth/rest/transactions/send').
+      a_post('/transactions/send').
         with(:body => payload).should have_been_made
     end
   end

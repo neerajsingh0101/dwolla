@@ -1,31 +1,30 @@
 module Dwolla
   module Connection
     private
-      def connection(options = {})
+      def connection
         default_options = {
           :headers => {
             :accept => 'application/json',
             :user_agent => Dwolla.user_agent,
-          },
-          :url => options.fetch(:endpoint, Dwolla.endpoint),
+          }
         }
 
-        @connection ||= Faraday.new(default_options.merge(options)) do |builder|
+        @connection ||= Faraday.new(Dwolla.endpoint, default_options) do |builder|
           builder.use Dwolla::Response::ParseJson
           builder.adapter :net_http
         end
       end
 
-      def get(path, params={}, options={})
-        request(:get, path, params, options)
+      def get(path, params={})
+        request(:get, path, params)
       end
 
-      def post(path, params={}, options={})
-        request(:post, path, params, options)
+      def post(path, params={})
+        request(:post, path, params)
       end
 
-      def request(method, path, params, options)
-        response = connection(options).send(method) do |request|
+      def request(method, path, params)
+        response = connection.send(method) do |request|
           case method.to_sym
           when :delete, :get
             request.url(path, params.merge(auth_params))
@@ -35,7 +34,7 @@ module Dwolla
             request.body = params unless params.empty?
           end
         end
-        options[:raw] ? response : response.body
+        response.body
       end
   end
 end
