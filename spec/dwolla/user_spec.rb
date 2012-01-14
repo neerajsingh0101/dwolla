@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Dwolla::User do
-  let(:oauth_token) { 'valid_token' } 
+  let(:oauth_token) { 'valid_token' }
   let(:token_param) { "oauth_token=#{oauth_token}" }
 
   describe "fetching your full account information" do
@@ -40,6 +40,7 @@ describe Dwolla::User do
 
 
       transaction = double('transaction')
+      transaction_id = 123
 
       Dwolla::Transaction.should_receive(:new).with(:origin => user,
                                             :destination => destination_user,
@@ -47,9 +48,9 @@ describe Dwolla::User do
                                             :type => :send,
                                             :pin => '2222').and_return(transaction)
 
-      transaction.should_receive(:execute).and_return([:success])
+      transaction.should_receive(:execute).and_return(transaction_id)
 
-      user.send_money_to(destination_user, amount, pin).should == [:success]
+      user.send_money_to(destination_user, amount, pin).should == 123
     end
   end
 
@@ -61,6 +62,7 @@ describe Dwolla::User do
       pin = '2222'
 
       transaction = double('transaction')
+      transaction_id = 123
 
       Dwolla::Transaction.should_receive(:new).with(:origin => user,
                                                     :destination => destination_user,
@@ -68,9 +70,9 @@ describe Dwolla::User do
                                                     :type => :request,
                                                     :pin => '2222').and_return(transaction)
 
-      transaction.should_receive(:execute).and_return([:success])
+      transaction.should_receive(:execute).and_return(transaction_id)
 
-      user.request_money_from(destination_user, amount, pin).should == [:success]
+      user.request_money_from(destination_user, amount, pin).should == 123
     end
   end
 
