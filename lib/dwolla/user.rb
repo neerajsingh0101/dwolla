@@ -9,14 +9,26 @@ module Dwolla
                   :city,
                   :state,
                   :type,
-                  :access_token
+                  :contact_type,
+                  :image,
+                  :oauth_token
 
     def initialize(attrs={})
       update_attributes(attrs)
     end
 
+    def self.instances_from_contacts(contacts)
+      user_instances = []
+      contacts.each do |contact|
+        contact["Contact_Type"] = contact["Type"]
+        contact.delete("Type")
+        user_instances << User.new(contact)
+      end
+      user_instances
+    end
+
     def self.me(access_token)
-      User.new(:access_token => access_token)
+      User.new(:oauth_token => access_token)
     end
 
     def fetch
@@ -45,13 +57,15 @@ module Dwolla
 
       contacts_url += "?#{string_params}&" unless params.empty?
 
-      get(contacts_url)
+      contacts = get(contacts_url)
+
+      User.instances_from_contacts(contacts)
     end
 
     private
 
       def query_params
-        "access_token=#{self.access_token}"
+        "oauth_token=#{self.oauth_token}"
       end
    end
 end
