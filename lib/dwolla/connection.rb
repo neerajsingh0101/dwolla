@@ -10,11 +10,12 @@ module Dwolla
         }
 
         @connection ||= Faraday.new(Dwolla.endpoint, default_options) do |builder|
+          builder.use FaradayStack::FollowRedirects
+
           builder.use Dwolla::Response::ParseJson
           builder.use Faraday::Request::UrlEncoded
 
           builder.response :logger if Dwolla.debugging?
-          builder.use FaradayStack::FollowRedirects
           builder.adapter Faraday.default_adapter
         end
       end
