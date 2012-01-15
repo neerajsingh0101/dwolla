@@ -7,7 +7,7 @@ module Dwolla
     end
 
     def user(id)
-      user_attributes_hash = get("account_information/#{id}")
+      user_attributes_hash = get("accountinformation/#{id}")
       User.new(user_attributes_hash)
     end
 

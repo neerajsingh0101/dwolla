@@ -6,13 +6,13 @@ describe Dwolla::Client do
 
   describe "getting user basic information" do
     before do
-      stub_get('/account_information/812-111-1111', query_params).
+      stub_get('/accountinformation/812-111-1111', query_params).
         to_return(:body => fixture("basic_information.json"))
     end
 
     it 'should request the correct resource' do
       subject.user('812-111-1111')
-      a_get('/account_information/812-111-1111', query_params).should have_been_made
+      a_get('/accountinformation/812-111-1111', query_params).should have_been_made
     end
 
     it 'should return extended information of a given user' do

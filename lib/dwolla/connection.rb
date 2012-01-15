@@ -13,6 +13,7 @@ module Dwolla
           builder.use Dwolla::Response::ParseJson
           builder.use Faraday::Request::UrlEncoded
 
+          builder.response :logger
           builder.adapter Faraday.default_adapter
         end
       end
