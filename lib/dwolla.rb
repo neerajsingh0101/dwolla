@@ -27,7 +27,7 @@ module Dwolla
 
   self.debug = false
   self.user_agent = "Dwolla Ruby Wrapper"
-  self.endpoint = "https://www.dwolla.com/oauth/rest/testapi"
+  self.endpoint = "https://www.dwolla.com/oauth/rest"
 end
 
 require "dwolla/response/parse_json"

@@ -6,14 +6,14 @@ describe Dwolla::User do
 
   describe "fetching your full account information" do
     before do
-      stub_get('/accountinformation', token_param).
+      stub_get('/users', token_param).
         to_return(:body => fixture("account_information.json"))
     end
 
     it "should request the correct resource" do
       user = Dwolla::User.me(oauth_token).fetch
 
-      a_get('/accountinformation', token_param).should have_been_made
+      a_get('/users', token_param).should have_been_made
     end
 
     it "should return full information" do

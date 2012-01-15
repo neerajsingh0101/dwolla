@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Dwolla do
-  its(:endpoint) { should == "https://www.dwolla.com/oauth/rest/testapi" }
+  its(:endpoint) { should == "https://www.dwolla.com/oauth/rest" }
   its(:user_agent) { should == "Dwolla Ruby Wrapper" }
 
   describe 'debugging' do

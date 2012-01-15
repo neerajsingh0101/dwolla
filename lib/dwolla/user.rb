@@ -22,7 +22,7 @@ module Dwolla
     end
 
     def fetch
-      user_attributes_hash = get('accountinformation')
+      user_attributes_hash = get('users')
       update_attributes(user_attributes_hash)
       self
     end
