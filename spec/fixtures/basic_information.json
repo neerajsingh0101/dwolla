@@ -1,10 +1,6 @@
 {
-    "Success": true,
-    "Message": "Success",
-    "Response": {
-        "Id": "812-111-1111",
-        "Latitude": 41.584546,
-        "Longitude": -93.634167,
-        "Name": "Test User"
-    }
+  "Id": "812-111-1111",
+  "Latitude": 41.584546,
+  "Longitude": -93.634167,
+  "Name": "Test User"
 }

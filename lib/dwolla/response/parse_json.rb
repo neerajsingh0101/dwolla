@@ -10,7 +10,7 @@ module Dwolla
           nil
         else
           response_hash = ::MultiJson.decode(body)
-          response_hash["Response"] || response_hash["SendResult"] || response_hash["RequestResult"]
+          response_hash["Response"] || response_hash["SendResult"] || response_hash["RequestResult"] || response_hash
         end
       end
     end
