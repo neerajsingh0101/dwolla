@@ -9,7 +9,7 @@ gem install dwolla
 ## Resources
 
 * View Source on GitHub (https://github.com/jeffersongirao/dwolla)
-* Report Issues on GitHub (https://github.com/jeffersongirao/dwolla)
+* Report Issues on GitHub (https://github.com/jeffersongirao/dwolla/issues)
 
 #### Users API
 
