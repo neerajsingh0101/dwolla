@@ -17,6 +17,15 @@ module Dwolla
     @@user_agent
   end
 
+  def self.debugging?
+    !!@@debug
+  end
+
+  def self.debug=(debug)
+    @@debug = debug
+  end
+
+  self.debug = false
   self.user_agent = "Dwolla Ruby Wrapper"
   self.endpoint = "https://www.dwolla.com/oauth/rest/testapi"
 end
