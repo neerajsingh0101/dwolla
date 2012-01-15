@@ -1,4 +1,4 @@
-require 'faraday'
+require 'faraday_stack'
 
 module Dwolla
   def self.endpoint=(endpoint)

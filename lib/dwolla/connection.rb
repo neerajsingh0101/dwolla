@@ -14,6 +14,7 @@ module Dwolla
           builder.use Faraday::Request::UrlEncoded
 
           builder.response :logger if Dwolla.debugging?
+          builder.use FaradayStack::FollowRedirects
           builder.adapter Faraday.default_adapter
         end
       end
