@@ -44,7 +44,7 @@ gem install dwolla
   # max limit is 200
 
   # type default is "Dwolla"
-  # type can be "All", "Twitter", "Facebook", "LinkedIn" and "Dwolla"
+  # valid types are "All", "Twitter", "Facebook", "LinkedIn" and "Dwolla"
 
   user.contacts(:search => "Bob", :type => "Dwolla", :limit => 5)
 ```
