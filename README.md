@@ -29,7 +29,7 @@ gem install dwolla
 #### Balance API
 
 ```ruby
-  user = Dwolla::User.me(ACCESS_TOKEN).fetch
+  user = Dwolla::User.me(ACCESS_TOKEN)
   user.balance
 ```
 
@@ -38,7 +38,7 @@ gem install dwolla
 ##### User Contacts
 
 ```ruby
-  user = Dwolla::User.me(ACCESS_TOKEN).fetch
+  user = Dwolla::User.me(ACCESS_TOKEN)
 
   # limit default is 10
   # max limit is 200
@@ -54,7 +54,7 @@ gem install dwolla
 ##### Sending Money
 
 ```ruby
-  user = Dwolla::User.me(ACCESS_TOKEN).fetch
+  user = Dwolla::User.me(ACCESS_TOKEN)
   other_user_id = 'sample@user.com' # or the Dwolla account id
   pin = '1234'
   amount = 200
@@ -65,7 +65,7 @@ gem install dwolla
 ##### Requesting Money
 
 ```ruby
-  user = Dwolla::User.me(ACCESS_TOKEN).fetch
+  user = Dwolla::User.me(ACCESS_TOKEN)
   other_user_id = 'sample@user.com' # or the Dwolla account id
   pin = '1234'
   amount = 200
