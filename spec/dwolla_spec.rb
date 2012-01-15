@@ -3,5 +3,16 @@ require 'spec_helper'
 describe Dwolla do
   its(:endpoint) { should == "https://www.dwolla.com/oauth/rest/testapi" }
   its(:user_agent) { should == "Dwolla Ruby Wrapper" }
-  it { should_not be_debugging }
+
+  describe 'debugging' do
+    after do
+      Dwolla.debug = false 
+    end
+
+    it { should_not be_debugging }
+
+    it 'should be debugging' do
+      Dwolla.debug = true
+    end
+  end
 end
