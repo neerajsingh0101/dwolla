@@ -13,20 +13,26 @@ gem install dwolla
 
 #### Users API
 
-##### With Access Token ( Auth Scope Required: accountinfofull )
+##### With Access Token 
+
+( Auth Scope Required: accountinfofull )
 
 ```ruby
   user = Dwolla::User.me(ACCESS_TOKEN).fetch
 ```
 
-##### With Client ID and Secret ( Auth Scope Required : none )
+##### With Client ID and Secret 
+
+( Auth Scope Required : none )
 
 ```ruby
   client = Dwolla::Client.new(CLIENT_ID, SECRET)
   user = client.user(ACCOUNT_ID) # Dwolla account identifier or email address of the Dwolla account.
 ```
 
-#### Balance API ( Auth Scope Required : balance )
+#### Balance API 
+
+( Auth Scope Required : balance )
 
 ```ruby
   user = Dwolla::User.me(ACCESS_TOKEN)
@@ -35,7 +41,9 @@ gem install dwolla
 
 #### Contacts API
 
-##### User Contacts ( Auth Scope Required : contacts)
+##### User Contacts 
+
+( Auth Scope Required : contacts)
 
 ```ruby
   user = Dwolla::User.me(ACCESS_TOKEN)
@@ -51,7 +59,9 @@ gem install dwolla
 
 #### Transactions API
 
-##### Sending Money ( Auth Scope Required: send )
+##### Sending Money 
+
+( Auth Scope Required: send )
 
 ```ruby
   user = Dwolla::User.me(ACCESS_TOKEN)
@@ -62,7 +72,9 @@ gem install dwolla
   user.send_money_to(other_user_id, amount, pin)
 ```
 
-##### Requesting Money ( Auth Scope Required: request )
+##### Requesting Money 
+
+( Auth Scope Required: request )
 
 ```ruby
   user = Dwolla::User.me(ACCESS_TOKEN)
