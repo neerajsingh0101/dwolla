@@ -11,6 +11,14 @@ gem install dwolla
 * View Source on GitHub (https://github.com/jeffersongirao/dwolla)
 * Report Issues on GitHub (https://github.com/jeffersongirao/dwolla/issues)
 
+## TODO
+
+* Contacts Nearby
+* Transactions Listing
+* Transactions Details by ID
+* Transactions Stats
+* Send and Request Transactions with Other Id types (Dwolla, Facebook, Twitter, Email, or Phone.)
+
 #### Users API
 
 ##### With Access Token 
