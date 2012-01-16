@@ -24,8 +24,8 @@ module Dwolla
       end
 
       def to_payload
-        { :destinationId => destination.id,
-          :amount => amount.to_s,
+        { :destinationId => destination,
+          :amount => amount,
           :pin => pin }
       end
   end

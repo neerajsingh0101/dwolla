@@ -4,14 +4,14 @@ describe Dwolla::Transaction do
   describe "send transaction" do
     before do
       @origin = double(:oauth_token => '1')
-      @destination = double(:id => '2')
+      @destination = '2'
 
-      @payload = { :oauth_token => '1',
-                   :destinationId => '2',
-                   :amount => '200',
-                   :pin => '1234' }
+      @payload = { :destinationId => '2',
+                   :amount => 200,
+                   :pin => '1234',
+                   :oauth_token => '1' }
 
-      stub_post('/transactions/send').with(:body => @payload).to_return(
+      stub_post('/transactions/send').with(:body => MultiJson.encode(@payload)).to_return(
         :body => fixture('send_transaction.json'))
     end
 
@@ -24,7 +24,7 @@ describe Dwolla::Transaction do
       transaction.execute
 
       a_post('/transactions/send').
-        with(:body => @payload).should have_been_made
+        with(:body => MultiJson.encode(@payload)).should have_been_made
     end
 
     it "should fetch the id if transaction succesfull" do
@@ -42,14 +42,14 @@ describe Dwolla::Transaction do
   describe "request transaction" do
     before do
       @origin = double(:oauth_token => '1')
-      @destination = double(:id => '2')
+      @destination = '2'
 
-      @payload = { :oauth_token => '1',
-                   :destinationId => '2',
-                   :amount => '200',
-                   :pin => '1234' }
+      @payload = { :destinationId => '2',
+                   :amount => 200,
+                   :pin => '1234',
+                   :oauth_token => '1' }
 
-      stub_post('/transactions/request').with(:body => @payload).to_return(
+      stub_post('/transactions/request').with(:body => MultiJson.encode(@payload)).to_return(
         :body => fixture('request_transaction.json'))
     end
 
@@ -62,7 +62,7 @@ describe Dwolla::Transaction do
       transaction.execute
 
       a_post('/transactions/request').
-        with(:body => @payload).should have_been_made
+        with(:body => MultiJson.encode(@payload)).should have_been_made
     end
 
     it "should fetch the id if transaction succesfull" do

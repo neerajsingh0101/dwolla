@@ -5,6 +5,7 @@ module Dwolla
         default_options = {
           :headers => {
             :accept => 'application/json',
+            :content_type => 'application/json',
             :user_agent => Dwolla.user_agent,
           }
         }
@@ -36,7 +37,7 @@ module Dwolla
           when :post
             request.path = path
             params.merge!(auth_params) if auth_params
-            request.body = params unless params.empty?
+            request.body = MultiJson.encode(params) unless params.empty?
           end
         end
         response.body
