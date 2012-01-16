@@ -65,7 +65,7 @@ gem install dwolla
 
 ```ruby
   user = Dwolla::User.me(ACCESS_TOKEN)
-  other_user_id = 'sample@user.com' # or the Dwolla account id
+  other_user_id = '812-111-1111'
   pin = '1234'
   amount = 200
 
@@ -78,7 +78,7 @@ gem install dwolla
 
 ```ruby
   user = Dwolla::User.me(ACCESS_TOKEN)
-  other_user_id = 'sample@user.com' # or the Dwolla account id
+  other_user_id = '812-111-1111'
   pin = '1234'
   amount = 200
 
