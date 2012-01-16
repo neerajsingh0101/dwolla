@@ -19,6 +19,8 @@ gem install dwolla
 * Transactions Stats
 * Send and Request Transactions with Other Id types (Dwolla, Facebook, Twitter, Email, or Phone.)
 
+## Usage
+
 #### Users API
 
 ##### With Access Token 
