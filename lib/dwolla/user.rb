@@ -54,9 +54,9 @@ module Dwolla
       transaction.execute
     end
 
-    def request_money_from(destination, amount, pin)
+    def request_money_from(source, amount, pin)
       transaction = Transaction.new(:origin => self,
-                                    :destination => destination,
+                                    :source => source,
                                     :type => :request,
                                     :amount => amount,
                                     :pin => pin)

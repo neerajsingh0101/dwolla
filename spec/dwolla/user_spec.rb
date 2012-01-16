@@ -57,7 +57,7 @@ describe Dwolla::User do
   describe "requesting money" do
     it "should make the correct transaction" do
       user = Dwolla::User.new(:oauth_token => '12345', :id => '1')
-      destination_user = Dwolla::User.new(:id => '2')
+      source_user_id = '2'
       amount = 10
       pin = '2222'
 
@@ -65,14 +65,14 @@ describe Dwolla::User do
       transaction_id = 123
 
       Dwolla::Transaction.should_receive(:new).with(:origin => user,
-                                                    :destination => destination_user,
+                                                    :source => source_user_id,
                                                     :amount => 10,
                                                     :type => :request,
                                                     :pin => '2222').and_return(transaction)
 
       transaction.should_receive(:execute).and_return(transaction_id)
 
-      user.request_money_from(destination_user, amount, pin).should == 123
+      user.request_money_from(source_user_id, amount, pin).should == 123
     end
   end
 

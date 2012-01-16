@@ -6,9 +6,9 @@ describe Dwolla::Transaction do
       @origin = double(:oauth_token => '1')
       @destination = '2'
 
-      @payload = { :destinationId => '2',
-                   :amount => 200,
+      @payload = { :amount => 200,
                    :pin => '1234',
+                   :destinationId => '2',
                    :oauth_token => '1' }
 
       stub_post('/transactions/send').with(:body => MultiJson.encode(@payload)).to_return(
@@ -42,11 +42,11 @@ describe Dwolla::Transaction do
   describe "request transaction" do
     before do
       @origin = double(:oauth_token => '1')
-      @destination = '2'
+      @source = '2'
 
-      @payload = { :destinationId => '2',
-                   :amount => 200,
+      @payload = { :amount => 200,
                    :pin => '1234',
+                   :sourceId => '2',
                    :oauth_token => '1' }
 
       stub_post('/transactions/request').with(:body => MultiJson.encode(@payload)).to_return(
@@ -55,7 +55,7 @@ describe Dwolla::Transaction do
 
     it "should request the correct resource" do
       transaction = Dwolla::Transaction.new(:origin => @origin,
-                                            :destination => @destination,
+                                            :source => @source,
                                             :type => :request,
                                             :amount => 200,
                                             :pin => '1234')
@@ -67,7 +67,7 @@ describe Dwolla::Transaction do
 
     it "should fetch the id if transaction succesfull" do
       transaction = Dwolla::Transaction.new(:origin => @origin,
-                                            :destination => @destination,
+                                            :source => @source,
                                             :type => :request,
                                             :amount => 200,
                                             :pin => '1234')
