@@ -29,6 +29,14 @@ describe Dwolla::User do
       user.type.should == 'Personal'
       user.oauth_token.should == oauth_token
     end
+
+    it "should raise a error if fetch failed" do
+      stub_get('/users', token_param).
+        to_return(:body => fixture("error.json"))
+
+      expect{ Dwolla::User.me(oauth_token).fetch }.to
+        raise_error(Dwolla::RequestException, "Token does not have access to requested resource.")
+    end
   end
 
   describe "sending money" do

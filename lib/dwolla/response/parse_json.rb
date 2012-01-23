@@ -16,6 +16,9 @@ module Dwolla
           nil
         else
           response_hash = ::MultiJson.decode(body)
+
+          raise Dwolla::RequestException, response_hash["Message"] if response_hash["Success"] == false
+
           response_hash["Response"] ||
             response_hash["SendResult"] ||
               response_hash["RequestResult"] ||

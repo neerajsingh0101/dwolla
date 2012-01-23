@@ -22,14 +22,15 @@ module Dwolla
     end
 
     def fetch
-      user_attributes_hash = get('users')
-      update_attributes(user_attributes_hash)
+      user_attributes = get('users')
+      update_attributes(user_attributes)
       self
     end
 
     def update_attributes(attrs)
       attrs.each do |key, value|
-        send("#{key.downcase}=".to_sym, value)
+        key_string = key.is_a?(String) ? key : key.to_s
+        send("#{key_string.downcase}=".to_sym, value)
       end
     end
 

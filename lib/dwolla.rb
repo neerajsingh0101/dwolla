@@ -30,6 +30,7 @@ module Dwolla
   self.endpoint = "https://www.dwolla.com/oauth/rest"
 end
 
+require "dwolla/exceptions"
 require "dwolla/response/parse_json"
 require "dwolla/connection"
 require "dwolla/client"
