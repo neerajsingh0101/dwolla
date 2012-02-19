@@ -1,5 +1,3 @@
-require 'faraday_stack'
-
 module Dwolla
   def self.endpoint=(endpoint)
     @@endpoint = endpoint
@@ -30,8 +28,12 @@ module Dwolla
   self.endpoint = "https://www.dwolla.com/oauth/rest"
 end
 
+require 'faraday'
+require 'multi_json'
+
 require "dwolla/exceptions"
 require "dwolla/response/parse_json"
+require "dwolla/response/follow_redirects"
 require "dwolla/connection"
 require "dwolla/client"
 require "dwolla/transaction"

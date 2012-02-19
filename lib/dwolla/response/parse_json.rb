@@ -1,6 +1,3 @@
-require 'faraday'
-require 'multi_json'
-
 module Dwolla
   module Response
     class ParseJson < Faraday::Response::Middleware
