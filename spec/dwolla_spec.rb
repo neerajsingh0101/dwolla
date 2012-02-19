@@ -13,6 +13,7 @@ describe Dwolla do
 
     it 'should be debugging' do
       Dwolla.debug = true
+      Dwolla.should be_debugging
     end
   end
 end
