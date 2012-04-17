@@ -37,7 +37,7 @@ module Dwolla
           when :post
             request.path = path
             params.merge!(auth_params) if auth_params
-            request.body = MultiJson.encode(params) unless params.empty?
+            request.body = MultiJson.dump(params) unless params.empty?
           end
         end
         response.body
