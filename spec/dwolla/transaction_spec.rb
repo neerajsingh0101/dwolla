@@ -11,7 +11,7 @@ describe Dwolla::Transaction do
                    :destinationId => '2',
                    :oauth_token => '1' }
 
-      stub_post('/transactions/send').with(:body => MultiJson.encode(@payload)).to_return(
+      stub_post('/transactions/send').with(:body => MultiJson.dump(@payload)).to_return(
         :body => fixture('send_transaction.json'))
     end
 
@@ -24,7 +24,7 @@ describe Dwolla::Transaction do
       transaction.execute
 
       a_post('/transactions/send').
-        with(:body => MultiJson.encode(@payload)).should have_been_made
+        with(:body => MultiJson.dump(@payload)).should have_been_made
     end
 
     it "should fetch the id if transaction succesfull" do
@@ -49,7 +49,7 @@ describe Dwolla::Transaction do
                    :sourceId => '2',
                    :oauth_token => '1' }
 
-      stub_post('/transactions/request').with(:body => MultiJson.encode(@payload)).to_return(
+      stub_post('/transactions/request').with(:body => MultiJson.dump(@payload)).to_return(
         :body => fixture('request_transaction.json'))
     end
 
@@ -62,7 +62,7 @@ describe Dwolla::Transaction do
       transaction.execute
 
       a_post('/transactions/request').
-        with(:body => MultiJson.encode(@payload)).should have_been_made
+        with(:body => MultiJson.dump(@payload)).should have_been_made
     end
 
     it "should fetch the id if transaction succesfull" do
